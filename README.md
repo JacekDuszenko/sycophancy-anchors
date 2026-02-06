@@ -84,17 +84,6 @@ python scripts/aggregate_multimodel_results.py --results-dir multimodel_prod/
 - **Anchor threshold**: δ = 0.50 (50% accuracy shift)
 - **Statistical methodology**: 10 random seeds, 80/20 train/test splits
 
-## Citation
-
-```bibtex
-@article{duszenko2026sycophantic,
-  title={Sycophantic Anchors: Detecting When Reasoning Models Lock Into User Agreement},
-  author={Duszenko, Jacek},
-  journal={ICLR 2026},
-  year={2026}
-}
-```
-
 ## Acknowledgments
 
 This work builds on the [Thought Anchors](https://arxiv.org/abs/2506.19143) framework by Bogdan et al.
