@@ -1,0 +1,88 @@
+Principled Design for Trustworthy AI - Interpretability, Robustness, and Safety across Modalities
+ICLR 2026 Workshop
+📍 International Conference on Learning Representations (ICLR 2026)
+📅 Date: Sunday April 26 or Monday April 27 · 🌍 Location: Rio de Janeiro, Brazil
+
+Overview
+Modern AI systems, particularly large language models, vision-language models, and deep vision networks, are increasingly deployed in high-stakes settings such as healthcare, autonomous driving, and legal decisions. Yet, their lack of transparency, fragility to distributional shifts between train/test environments, and representation misalignment in emerging tasks and data/feature modalities raise serious concerns about their trustworthiness.
+
+This workshop focuses on developing trustworthy AI systems by principled design: models that are interpretable, robust, and aligned across the full lifecycle – from training and evaluation to inference-time behavior and deployment. We aim to unify efforts across modalities (language, vision, audio, and time series) and across technical areas of trustworthiness spanning interpretability, robustness, uncertainty, and safety.
+
+Call for Papers
+We invite submissions on topics including (but not limited to):
+
+Interpretable and Intervenable Models
+concept bottlenecks and modular architectures, mechanistic interpretability and concept-based reasoning, interpretability for control and real-time intervention;
+Inference-Time Safety and Monitoring
+reasoning trace auditing in LLMs and VLMs, inference-time safeguards and safety mechanisms, chain-of-thought consistency and hallucination detection, real-time monitoring and failure intervention mechanisms;
+Multimodal Trust Challenges
+grounding failures and cross-modal misalignment, safety in vision-language and deep vision systems, cross-modal alignment and robust multimodal reasoning, trust and uncertainty in video, audio, and time-series models
+Robustness and Threat Models
+adversarial attacks and defenses, robustness to distributional, conceptual, and cascading shifts, formal verification methods and safety guarantees, robustness under streaming, online, or low-resource conditions;
+Trust Evaluation and Responsible Deployment
+human-AI trust calibration, confidence estimation, uncertainty quantification, metrics for interpretability/alignment/robustness, transparent and accountable deployment pipelines, safety alignment;
+Safety and Trustworthiness in LLM Agents
+safety and failures in planning and action execution, emergent behaviors in multi-agent interactions, intervention and control in agent loops, alignment of long-horizon goals with user intent, auditing and debugging LLM agents in real-world deployment.
+Reviews are double-blind and the accepted papers are non-archival. Accepted papers will be presented as posters and/or short talks.
+
+Submission Instruction
+Format: (1) Short paper track: max 4 pages, excluding references; (2) Long paper track: max 9 pages, excluding references. Please use the LaTeX style files (ICLR conference style) provided here.
+Submission: Openreview link
+Submission deadline: Feb 2, 2026 (AoE)
+Guideline: The content of submission needs to be original and not accepted in other archival venues by the time of our submission deadline. Violation of this policy will be desk-rejected.
+Note that for Openreivew submission, new profiles created without an institutional email will go through a moderation process that can take up to two weeks. New profiles created with an institutional email will be activated automatically.
+
+Important Dates
+Event	Date
+Submission deadline	Feb 2, 2026
+Notification to authors	Feb 28, 2026
+Camera-ready deadline	Mar 6, 2026
+Workshop date	April 26 or 27, 2026
+(All deadlines are AoE.)
+
+Invited Speakers
+Yan Liu
+Yan Liu
+USC, Full Professor
+ Mihaela van der Schaar
+Mihaela van der Schaar
+U Cambridge, Full Professor
+Nanyun (Violet) Peng
+Nanyun (Violet) Peng
+UCLA, Associate Professor
+Hamed Hassani
+Hamed Hassani
+UPenn, Associate Professor
+Martin Wattenberg
+Martin Wattenberg
+Harvard, Professor
+Fernanda Viegas
+Fernanda Viegas
+Harvard, Professor
+Organizers
+Lily Weng
+Lily Weng
+UC San Diego
+Nghia Hoang
+Nghia Hoang
+Washington State U
+Tengfei Ma
+Tengfei Ma
+Stony Brook U
+Jake Snell
+Jake Snell
+Princeton
+Francesco Croce
+Francesco Croce
+Aalto U
+Chandan Singh
+Chandan Singh
+Microsoft Research
+Subarna Tripathi
+Subarna Tripathi
+Intel
+Lam Nguyen
+Lam Nguyen
+IBM Research
+Contact
+📧 Lily Weng (lweng@ucsd.edu), Nghia Hoang (trongnghia.hoang@wsu.edu)

@@ -1,0 +1,95 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Data files
+*.pkl
+*.json
+*.jsonl
+*.npy
+*.npz
+*.csv
+*.safetensors
+*.arrow
+*.zip
+*.tar
+*.tar.gz
+
+# Figures and plots
+*.png
+*.pdf
+plots/
+
+# Logs
+*.log
+*.out
+nohup.out
+
+# Lock files
+*.lock
+
+# Root-level scripts (kept only in scripts/ and multimodel/)
+/*.py
+/*.sh
+/*.txt
+!requirements.txt
+
+# Root-level data
+/*.jsonl
+/*.json
+
+# Data/results directories
+.cache/
+analysis/
+figures/
+multimodel_test/
+multimodel_results/
+multimodel_test_run/
+multimodel_test_results/
+multimodel_prod/
+multimodel_seven/
+analysis_results/
+falcon/
+gpt_oss_exploration/
+llama_multimodel/
+qwen_multimodel/
+old_regressor_training.py
+
+# vLLM / experiment data
+math-rollouts/
+math-rollouts_test/
+prod_run_v1/
+syco_base/
+rollouts_vllm/
+test_run_v2/
+test_output/
+test_verification/
+activations_output/
+sycophancy_detector/
+thought-anchors/
+
+# Old directories
+whitebox-analyses/
+masking_graphs/
+anchorz/
+misc-experiments/
+misc-scripts/
+interspeech_*
+
+# Multimodel scripts cache
+multimodel/scripts/.cache/
+
+# IDE / editor
+.cursorindexingignore
+.specstory
+
+# LaTeX build artifacts (keep source files)
+latex/**/*.aux
+latex/**/*.bbl
+latex/**/*.blg
+latex/**/*.log
+latex/**/*.out
+latex/**/*.pdf
+latex/**/*.png
