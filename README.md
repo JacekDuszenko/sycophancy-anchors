@@ -17,18 +17,22 @@ Each sample includes the full reasoning trace, sentence segmentation, and probab
 ## Repository Structure
 
 ```
-├── generate_rollouts_vllm_spacy_fix.py   # Counterfactual rollout generation
-├── generate_sycophantic_base.py          # Base response generation for sycophancy analysis
-├── train_sycophancy_detector.py          # Linear probe training for anchor detection
-├── experiment_pairwise_discriminability.py # Pairwise classification experiments
-├── train_binary_time_probe.py            # Sycophancy emergence analysis
-├── train_causal_impact_regressor.py      # Strength regression (R² = 0.74)
-├── train_layer_probes.py                 # Layer-wise probe analysis
-├── train_three_class_probe.py            # Three-class anchor classification
-├── generate_appendix_figure.py           # Figure generation for paper
-├── detector_utils.py                     # Utility functions for detection
-├── utils.py                              # General utilities
-└── prompts.py                            # Prompt templates
+├── multimodel/                  # Core pipeline package
+│   ├── config/                  #   Model registry & experiment config
+│   ├── data/                    #   Dataset loading (HuggingFace)
+│   ├── generation/              #   Base, rollout, and judge generation (vLLM)
+│   ├── extraction/              #   Activation extraction
+│   ├── experiments/             #   Probes, regressors, emergence analysis
+│   ├── checkpointing/           #   Checkpoint & progress tracking
+│   ├── output/                  #   CSV export
+│   └── scripts/                 #   Entry points (run_pipeline.py, shell wrappers)
+├── scripts/                     # Analysis & post-processing
+│   ├── aggregate_multimodel_results.py
+│   ├── prepare_llama_multimodel.py
+│   ├── text_baseline_comparison.py
+│   └── threshold_sweep_analysis.py
+├── latex/                       # Paper source (ICLR 2026 / KDD 2026)
+└── requirements.txt
 ```
 
 ## Reproducing Results
@@ -36,82 +40,33 @@ Each sample includes the full reasoning trace, sentence segmentation, and probab
 ### Prerequisites
 
 ```bash
-pip install torch transformers vllm spacy scikit-learn matplotlib
+pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 ```
 
-### 1. Generate Base Responses
+### Run the full pipeline for a single model
 
-Generate initial model responses to adversarial conversations:
+The pipeline handles base generation, counterfactual rollouts, judging, activation extraction, and all experiments in one command:
 
 ```bash
-python generate_sycophantic_base.py \
-    --model deepseek-ai/DeepSeek-R1-Distill-Llama-8B \
-    --temperature 0.6 \
-    --top_p 0.95
+VLLM_WORKER_MULTIPROC_METHOD=spawn python multimodel/scripts/run_pipeline.py \
+    --model deepseek-qwen-1.5b \
+    --n-samples 101 \
+    --rollouts-per-sentence 20
 ```
 
-### 2. Generate Counterfactual Rollouts
+See `multimodel/config/model_registry.py` for the list of supported model keys.
 
-For each sentence position, generate 20 counterfactual completions:
+### Run across all models
 
 ```bash
-python generate_rollouts_vllm_spacy_fix.py \
-    --model deepseek-ai/DeepSeek-R1-Distill-Llama-8B \
-    --num_rollouts 20 \
-    --temperature 0.6 \
-    --top_p 0.95
+bash multimodel/scripts/run_prod_loop.sh
 ```
 
-### 3. Train Pairwise Classification Probes (Figure 2)
-
-Train linear probes to distinguish sycophantic anchors from correct anchors and neutral sentences:
+### Aggregate cross-model results
 
 ```bash
-python experiment_pairwise_discriminability.py \
-    --layer 28 \
-    --n_seeds 10
-```
-
-Expected results:
-- Sycophantic vs Correct anchors: **84.6%** balanced accuracy
-- Sycophantic vs Neutral: **77.5%** balanced accuracy
-- Correct vs Neutral: **64.0%** balanced accuracy
-
-### 4. Analyze Sycophancy Emergence (Figure 3)
-
-Train probes at each token position before anchor to study when sycophancy emerges:
-
-```bash
-python train_binary_time_probe.py \
-    --window_size 30 \
-    --layer 28
-```
-
-Expected results:
-- Prompt final token: **55.1%** (near chance)
-- At anchor: **72.9%** (17.8 pp increase during reasoning)
-
-### 5. Train Strength Regressor (Figure 4)
-
-Train MLP regressor to predict probability ratio from activations:
-
-```bash
-python train_causal_impact_regressor.py \
-    --layer 28 \
-    --hidden_dim 256
-```
-
-Expected results:
-- R² = **0.742** (74% variance explained)
-- RMSE = **1.90**
-
-### 6. Layer-wise Analysis
-
-Analyze probe accuracy across all model layers:
-
-```bash
-python train_layer_probes.py
+python scripts/aggregate_multimodel_results.py --results-dir multimodel_prod/
 ```
 
 ## Key Findings
@@ -124,10 +79,9 @@ python train_layer_probes.py
 
 ## Model Details
 
-- **Model**: DeepSeek-R1-Distill-Llama-8B
+- **Models**: Multi-model study across DeepSeek-R1 distillations (Qwen 1.5B/7B/14B/32B, Llama 8B/70B)
 - **Dataset**: ARC (AI2 Reasoning Challenge)
 - **Anchor threshold**: δ = 0.50 (50% accuracy shift)
-- **Probe layer**: 28 (of 32)
 - **Statistical methodology**: 10 random seeds, 80/20 train/test splits
 
 ## Citation
